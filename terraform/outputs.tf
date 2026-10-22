@@ -8,8 +8,12 @@ output "aws_region" {
   value       = var.aws_region
 }
 
-# Add resource outputs here, for example:
-# output "vpc_id" {
-#   description = "ID of the VPC"
-#   value       = aws_vpc.main.id
-# }
+output "vpc_id" {
+  description = "ID of the VPC"
+  value       = module.networking.vpc_id
+}
+
+output "vpc_cidr_block" {
+  description = "CIDR block of the VPC"
+  value       = module.networking.vpc_cidr_block
+}
