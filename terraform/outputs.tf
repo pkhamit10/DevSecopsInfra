@@ -18,7 +18,7 @@ output "vpc_cidr_block" {
   value       = module.networking.vpc_cidr_block
 }
 
-output "public_subnet_a_id" {
-  description = "ID of Public Subnet A"
-  value       = module.networking.public_subnet_a_id
+output "public_subnet_ids" {
+  description = "Map of public subnet IDs keyed by subnet identifier"
+  value       = module.networking.public_subnet_ids
 }

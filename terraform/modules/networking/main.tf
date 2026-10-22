@@ -8,14 +8,16 @@ resource "aws_vpc" "main" {
   })
 }
 
-resource "aws_subnet" "public_a" {
+resource "aws_subnet" "public" {
+  for_each = var.public_subnets
+
   vpc_id                  = aws_vpc.main.id
-  cidr_block              = var.public_subnet_a_cidr
-  availability_zone       = var.availability_zone_a
+  cidr_block              = each.value.cidr_block
+  availability_zone       = each.value.availability_zone
   map_public_ip_on_launch = true
 
   tags = merge(var.tags, {
-    Name = "${var.project_name}-${var.environment}-public-a"
+    Name = "${var.project_name}-${var.environment}-public-${each.key}"
     Tier = "Public"
   })
 }
