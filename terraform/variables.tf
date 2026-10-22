@@ -22,10 +22,13 @@ variable "vpc_cidr" {
   default     = "10.0.0.0/16"
 }
 
-variable "public_subnet_a_cidr" {
-  description = "CIDR block for Public Subnet A"
-  type        = string
-  default     = "10.0.1.0/24"
+variable "public_subnets" {
+  description = "Map of public subnets, keyed by subnet identifier (e.g. \"a\", \"b\")"
+  type = map(object({
+    cidr_block        = string
+    availability_zone = string
+  }))
+  default = {}
 }
 
 variable "tags" {
