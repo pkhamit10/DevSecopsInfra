@@ -3,6 +3,16 @@ variable "vpc_cidr" {
   type        = string
 }
 
+variable "public_subnet_a_cidr" {
+  description = "CIDR block for Public Subnet A"
+  type        = string
+}
+
+variable "availability_zone_a" {
+  description = "Availability zone for Public Subnet A"
+  type        = string
+}
+
 variable "environment" {
   description = "Deployment environment (e.g. dev, staging, prod)"
   type        = string
