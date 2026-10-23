@@ -26,7 +26,7 @@ variable "public_subnets" {
   description = "Map of public subnets, keyed by subnet identifier (e.g. \"a\", \"b\")"
   type = map(object({
     cidr_block        = string
-    availability_zone = string
+    availability_zone = optional(string)
   }))
   default = {}
 }
