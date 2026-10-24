@@ -8,7 +8,8 @@ locals {
     Environment = var.environment
   })
 
-  subnet_keys = sort(keys(var.public_subnets))
+  subnet_keys             = sort(keys(var.public_subnets))
+  application_subnet_keys = sort(keys(var.application_subnets))
 }
 
 resource "aws_vpc" "main" {
@@ -32,5 +33,19 @@ resource "aws_subnet" "public" {
   tags = merge(local.common_tags, {
     Name = "${var.project_name}-${var.environment}-public-${each.key}"
     Tier = "Public"
+  })
+}
+
+resource "aws_subnet" "application" {
+  for_each = var.application_subnets
+
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = each.value.cidr_block
+  availability_zone       = each.value.availability_zone != null ? each.value.availability_zone : element(data.aws_availability_zones.available.names, index(local.application_subnet_keys, each.key))
+  map_public_ip_on_launch = false
+
+  tags = merge(local.common_tags, {
+    Name = "${var.project_name}-${var.environment}-${each.key}"
+    Tier = "Application"
   })
 }
