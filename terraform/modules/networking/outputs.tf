@@ -32,3 +32,18 @@ output "application_subnet_cidr_blocks" {
   description = "Map of application subnet CIDR blocks keyed by subnet name"
   value       = { for k, s in aws_subnet.application : k => s.cidr_block }
 }
+
+output "data_subnet_ids" {
+  description = "Map of data subnet IDs keyed by subnet name"
+  value       = { for k, s in aws_subnet.data : k => s.id }
+}
+
+output "data_subnet_cidr_blocks" {
+  description = "Map of data subnet CIDR blocks keyed by subnet name"
+  value       = { for k, s in aws_subnet.data : k => s.cidr_block }
+}
+
+output "internet_gateway_id" {
+  description = "ID of the internet gateway"
+  value       = aws_internet_gateway.main.id
+}
