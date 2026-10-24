@@ -52,3 +52,23 @@ output "public_route_table_id" {
   description = "ID of the public route table"
   value       = aws_route_table.public.id
 }
+
+output "elastic_ip_id" {
+  description = "Allocation ID of the elastic IP"
+  value       = aws_eip.main.id
+}
+
+output "elastic_ip_address" {
+  description = "Public IP address of the elastic IP"
+  value       = aws_eip.main.public_ip
+}
+
+output "nat_gateway_id" {
+  description = "ID of the NAT gateway"
+  value       = aws_nat_gateway.main.id
+}
+
+output "application_route_table_id" {
+  description = "ID of the application route table"
+  value       = aws_route_table.application.id
+}

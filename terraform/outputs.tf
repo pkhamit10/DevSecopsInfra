@@ -42,3 +42,23 @@ output "public_route_table_id" {
   description = "ID of the public route table"
   value       = module.networking.public_route_table_id
 }
+
+output "elastic_ip_id" {
+  description = "Allocation ID of the elastic IP"
+  value       = module.networking.elastic_ip_id
+}
+
+output "elastic_ip_address" {
+  description = "Public IP address of the elastic IP"
+  value       = module.networking.elastic_ip_address
+}
+
+output "nat_gateway_id" {
+  description = "ID of the NAT gateway"
+  value       = module.networking.nat_gateway_id
+}
+
+output "application_route_table_id" {
+  description = "ID of the application route table"
+  value       = module.networking.application_route_table_id
+}
