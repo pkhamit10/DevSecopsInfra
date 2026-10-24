@@ -92,3 +92,24 @@ resource "aws_route_table_association" "public" {
   subnet_id      = each.value.id
   route_table_id = aws_route_table.public.id
 }
+
+resource "aws_eip" "main" {
+  domain = "vpc"
+
+  tags = merge(local.common_tags, {
+    Name = "${var.project_name}-${var.environment}-eip"
+  })
+
+  depends_on = [aws_internet_gateway.main]
+}
+
+resource "aws_nat_gateway" "main" {
+  allocation_id = aws_eip.main.id
+  subnet_id     = aws_subnet.public[local.subnet_keys[0]].id
+
+  tags = merge(local.common_tags, {
+    Name = "${var.project_name}-${var.environment}-nat"
+  })
+
+  depends_on = [aws_internet_gateway.main]
+}
