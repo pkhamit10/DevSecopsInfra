@@ -27,3 +27,18 @@ output "application_subnet_ids" {
   description = "Map of application subnet IDs keyed by subnet name"
   value       = module.networking.application_subnet_ids
 }
+
+output "data_subnet_ids" {
+  description = "Map of data subnet IDs keyed by subnet name"
+  value       = module.networking.data_subnet_ids
+}
+
+output "internet_gateway_id" {
+  description = "ID of the internet gateway"
+  value       = module.networking.internet_gateway_id
+}
+
+output "public_route_table_id" {
+  description = "ID of the public route table"
+  value       = module.networking.public_route_table_id
+}

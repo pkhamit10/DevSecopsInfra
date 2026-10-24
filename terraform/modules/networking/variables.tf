@@ -36,3 +36,12 @@ variable "application_subnets" {
   }))
   default = {}
 }
+
+variable "data_subnets" {
+  description = "Map of data subnets, keyed by subnet name (e.g. \"data-a\")"
+  type = map(object({
+    cidr_block        = string
+    availability_zone = optional(string)
+  }))
+  default = {}
+}

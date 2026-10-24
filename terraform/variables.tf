@@ -51,3 +51,15 @@ variable "application_subnets" {
     "application-b" = { cidr_block = "10.0.11.0/24" }
   }
 }
+
+variable "data_subnets" {
+  description = "Map of data subnets, keyed by subnet name (e.g. \"data-a\")"
+  type = map(object({
+    cidr_block        = string
+    availability_zone = optional(string)
+  }))
+  default = {
+    "data-a" = { cidr_block = "10.0.20.0/24" }
+    "data-b" = { cidr_block = "10.0.21.0/24" }
+  }
+}
