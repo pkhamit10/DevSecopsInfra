@@ -67,3 +67,8 @@ output "nat_gateway_id" {
   description = "ID of the NAT gateway"
   value       = aws_nat_gateway.main.id
 }
+
+output "application_route_table_id" {
+  description = "ID of the application route table"
+  value       = aws_route_table.application.id
+}

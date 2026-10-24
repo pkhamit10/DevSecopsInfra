@@ -57,3 +57,8 @@ output "nat_gateway_id" {
   description = "ID of the NAT gateway"
   value       = module.networking.nat_gateway_id
 }
+
+output "application_route_table_id" {
+  description = "ID of the application route table"
+  value       = module.networking.application_route_table_id
+}
