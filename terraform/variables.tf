@@ -39,3 +39,15 @@ variable "tags" {
     Project   = "DevSecopsInfra"
   }
 }
+
+variable "application_subnets" {
+  description = "Map of application subnets, keyed by subnet name (e.g. \"application-a\")"
+  type = map(object({
+    cidr_block        = string
+    availability_zone = optional(string)
+  }))
+  default = {
+    "application-a" = { cidr_block = "10.0.10.0/24" }
+    "application-b" = { cidr_block = "10.0.11.0/24" }
+  }
+}

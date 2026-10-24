@@ -27,3 +27,12 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "application_subnets" {
+  description = "Map of application subnets, keyed by subnet name (e.g. \"application-a\")"
+  type = map(object({
+    cidr_block        = string
+    availability_zone = optional(string)
+  }))
+  default = {}
+}

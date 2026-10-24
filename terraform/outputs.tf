@@ -22,3 +22,8 @@ output "public_subnet_ids" {
   description = "Map of public subnet IDs keyed by subnet identifier"
   value       = module.networking.public_subnet_ids
 }
+
+output "application_subnet_ids" {
+  description = "Map of application subnet IDs keyed by subnet name"
+  value       = module.networking.application_subnet_ids
+}
