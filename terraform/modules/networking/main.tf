@@ -126,3 +126,10 @@ resource "aws_route_table" "application" {
     Name = "${var.project_name}-${var.environment}-application-rt"
   })
 }
+
+resource "aws_route_table_association" "application" {
+  for_each = aws_subnet.application
+
+  subnet_id      = each.value.id
+  route_table_id = aws_route_table.application.id
+}

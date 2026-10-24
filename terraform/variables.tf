@@ -63,3 +63,9 @@ variable "data_subnets" {
     "data-b" = { cidr_block = "10.0.21.0/24" }
   }
 }
+
+variable "aws_profile" {
+  description = "AWS CLI profile used by the provider"
+  type        = string
+  default     = "pk"
+}
