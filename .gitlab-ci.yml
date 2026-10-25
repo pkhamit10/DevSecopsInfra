@@ -1,0 +1,44 @@
+stages:
+  - fmt
+  - validate
+  - plan
+
+variables:
+  TF_ROOT: terraform
+  TF_IN_AUTOMATION: "true"
+
+default:
+  image:
+    name: hashicorp/terraform:1.9
+    entrypoint: [""]
+  cache:
+    key: terraform-providers
+    paths:
+      - $TF_ROOT/.terraform/providers
+
+fmt:
+  stage: fmt
+  script:
+    - cd "$TF_ROOT"
+    - terraform fmt -check -recursive -diff
+
+validate:
+  stage: validate
+  script:
+    - cd "$TF_ROOT"
+    - terraform init -backend=false -input=false
+    - terraform validate
+
+# plan:
+#   stage: plan
+#   variables:
+#     # Local profile name does not exist in CI; credentials come from CI/CD variables
+#     TF_VAR_aws_profile: ""
+#   script:
+#     - cd "$TF_ROOT"
+#     - terraform init -input=false
+#     - terraform plan -input=false -out=tfplan
+#   artifacts:
+#     paths:
+#       - $TF_ROOT/tfplan
+#     expire_in: 1 week
