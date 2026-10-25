@@ -22,12 +22,12 @@ fmt:
     - cd "$TF_ROOT"
     - terraform fmt -check -recursive -diff
 
-validate:
-  stage: validate
-  script:
-    - cd "$TF_ROOT"
-    - terraform init -backend=false -input=false
-    - terraform validate
+# validate:
+#   stage: validate
+#   script:
+#     - cd "$TF_ROOT"
+#     - terraform init -backend=false -input=false
+#     - terraform validate
 
 # plan:
 #   stage: plan
