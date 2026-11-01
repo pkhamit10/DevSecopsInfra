@@ -3,6 +3,7 @@ stages:
   - validate
   - plan
   - apply
+  - destroy
 
 variables:
   TF_ROOT: terraform
@@ -44,16 +45,30 @@ plan:
       - $TF_ROOT/tfplan
     expire_in: 1 week
 
-apply:
-  stage: apply
+# apply:
+#   stage: apply
+#   variables:
+#     TF_VAR_aws_profile: ""
+#   script:
+#     - cd "$TF_ROOT"
+#     - terraform init -input=false
+#     - terraform apply -input=false tfplan
+#   dependencies:
+#     - plan
+#   rules:
+#     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+#       when: manual
+#   environment:
+#     name: dev
+
+destroy:
+  stage: destroy
   variables:
     TF_VAR_aws_profile: ""
   script:
     - cd "$TF_ROOT"
     - terraform init -input=false
-    - terraform apply -input=false tfplan
-  dependencies:
-    - plan
+    - terraform destroy -input=false -auto-approve
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
       when: manual
