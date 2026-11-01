@@ -9,7 +9,7 @@ variables:
 
 default:
   image:
-    name: hashicorp/terraform:1.9
+    name: hashicorp/terraform:1.13.0
     entrypoint: [""]
   cache:
     key: terraform-providers
@@ -29,16 +29,16 @@ validate:
     - terraform init -backend=false -input=false
     - terraform validate
 
-# plan:
-#   stage: plan
-#   variables:
-#     # Local profile name does not exist in CI; credentials come from CI/CD variables
-#     TF_VAR_aws_profile: ""
-#   script:
-#     - cd "$TF_ROOT"
-#     - terraform init -input=false
-#     - terraform plan -input=false -out=tfplan
-#   artifacts:
-#     paths:
-#       - $TF_ROOT/tfplan
-#     expire_in: 1 week
+plan:
+  stage: plan
+  variables:
+    # Local profile name does not exist in CI; credentials come from CI/CD variables
+    TF_VAR_aws_profile: ""
+  script:
+    - cd "$TF_ROOT"
+    - terraform init -input=false
+    - terraform plan -input=false -out=tfplan
+  artifacts:
+    paths:
+      - $TF_ROOT/tfplan
+    expire_in: 1 week
