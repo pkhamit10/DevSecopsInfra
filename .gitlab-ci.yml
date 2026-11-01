@@ -9,7 +9,7 @@ variables:
 
 default:
   image:
-    name: hashicorp/terraform:1.9
+    name: hashicorp/terraform:1.13.0
     entrypoint: [""]
   cache:
     key: terraform-providers
